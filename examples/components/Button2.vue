@@ -1,6 +1,19 @@
 <template>
     <div class="Button2">
         <div class="button">日期-选择器</div>
+        <Region
+            :visible.sync="visible"
+            defaultDate="1990"
+            start="1950"
+            end="2030"
+            format="YYYY-MM-DD"
+            title="日期选择器"
+            cancelText="取消"
+            confirmText=" 确定"
+            :maskClick="false"
+            @cancel="cancel"
+            @confirm="confirm"
+        />
     </div>
 </template>
 <script>
@@ -8,7 +21,7 @@ export default {
     name: "Button2",
     data() {
         return {
-            
+            visible:false,
         };
     },
     mounted() {
@@ -17,7 +30,13 @@ export default {
         });
     },
     methods: {
-        
+        confirm(e){
+            console.log('确定: ', JSON.stringify(e));
+            this.$emit('success', JSON.stringify(e));
+        },
+        cancel(){
+            console.log("取消了");
+        }
     },
 };
 </script>
@@ -40,7 +59,7 @@ export default {
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-        padding: 12px 20px;
+        padding: 12px 15px;
         font-size: 14px;
         border-radius: 4px;
         color: #fff;

@@ -12,7 +12,6 @@
             @cancel="cancel"
             @confirm="confirm"
         />
-        <div id="aaa"></div>
     </div>
 </template>
 <script>
@@ -32,6 +31,10 @@ export default {
         defaultRegion: {
             type: String,
             default: "北京市,北京市,东城区",//广东省,广州市,天河区
+        },
+        customItem: {
+            type: String,
+            default: '',
         },
         title: {
             type: String,
@@ -104,6 +107,9 @@ export default {
             let i = -1;
             let provinceArr = [];
             let provinceObj = data["86"];
+            if(this.customItem){
+                provinceArr.push({label:this.customItem,value:this.customItem});
+            }
             for (const key in provinceObj) {
                 if (Object.prototype.hasOwnProperty.call(provinceObj,key)) {
                     i++;
@@ -113,7 +119,7 @@ export default {
                     });
                     if(provinceName === provinceObj[key]){
                         code = key;
-                        this.defaultIndex[0] = i;
+                        this.defaultIndex[0] = !this.customItem?i:i+1;
                     }
                 }
             }
@@ -123,6 +129,9 @@ export default {
             let j = -1;
             let cityArr = [];
             let cityObj = data[code];
+            if(this.customItem){
+                cityArr.push({label:this.customItem,value:this.customItem});
+            }
             for (const key in cityObj) {
                 if (Object.prototype.hasOwnProperty.call(cityObj,key)) {
                     j++;
@@ -132,7 +141,7 @@ export default {
                     });
                     if(cityName === cityObj[key]){
                         code = key;
-                        this.defaultIndex[1] = j;
+                        this.defaultIndex[1] = !this.customItem?j:j+1;
                     }
                 }
             }
@@ -142,6 +151,9 @@ export default {
             let k = -1;
             let districtArr = [];
             let districtObj = data[code];
+            if(this.customItem){
+                districtArr.push({label:this.customItem,value:this.customItem});
+            }
             for (const key in districtObj) {
                 if (Object.prototype.hasOwnProperty.call(districtObj,key)) {
                     k++;
@@ -151,7 +163,7 @@ export default {
                     });
                     if(districtName === districtObj[key]){
                         code = key;
-                        this.defaultIndex[2] = k;
+                        this.defaultIndex[2] = !this.customItem?k:k+1;
                         //this.$set(this.defaultIndex,2,k);//如果使用mounted生命周期函数调用setDefaultIndex()，必须使用$set()方法更新props的数据
                     }
                 }
@@ -164,6 +176,9 @@ export default {
             let arr = [];
             let code = this.region[0][selectedIndex].value;
             let obj = data[code];
+            if(this.customItem){
+                arr.push({label:this.customItem,value:this.customItem});
+            }
             for (const key in obj) {
                 if (Object.prototype.hasOwnProperty.call(obj,key)) {
                     arr.push({
@@ -180,6 +195,9 @@ export default {
             let arr = [];
             let code = this.region[1][selectedIndex].value;
             let obj = data[code];
+            if(this.customItem){
+                arr.push({label:this.customItem,value:this.customItem});
+            }
             for (const key in obj) {
                 if (Object.prototype.hasOwnProperty.call(obj,key)) {
                     arr.push({

@@ -97,7 +97,7 @@ export default {
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-        padding: 12px 20px;
+        padding: 12px 15px;
         font-size: 14px;
         border-radius: 4px;
         color: #fff;

@@ -4,6 +4,7 @@
         <Region
             :visible.sync="visible"
             defaultRegion="广东省,茂名市,化州市"
+            customItem="全部"
             title="省市区选择器"
             cancelText="取消"
             confirmText=" 确定"
@@ -56,7 +57,7 @@ export default {
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-        padding: 12px 20px;
+        padding: 12px 15px;
         font-size: 14px;
         border-radius: 4px;
         color: #fff;
