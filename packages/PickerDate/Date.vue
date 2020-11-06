@@ -60,8 +60,18 @@ export default {
             default: false,
         },
     },
+    watch: {
+        defaultDate(){
+            if(this.once === 0){
+                //初始化默认值，只执行一次
+                this.once = 1;
+                this.initDefault();
+            } 
+        },
+    },
     data() {
         return {
+            once:0,
             data:[],
             defaultIndex:[0,0,0],
             startDate:"",
@@ -69,7 +79,7 @@ export default {
         };
     },
     created() {
-        
+        this.initDefault();
     },
     mounted() {
         this.$nextTick(function() {
@@ -77,7 +87,26 @@ export default {
         });
     },
     methods: {
-        
+        initDefault(){
+
+        },
+        change(/* e */){
+            //let {position,selectedIndex} = e;
+            
+        },
+        close(){
+            //关闭
+            this.$emit('update:visible', false);
+        },
+        cancel(){
+            //取消
+            this.close();
+            this.$emit('cancel', false);
+        },
+        confirm(/* arr */){
+            this.close();
+            this.$emit('confirm', "");
+        },
     },
 };
 </script>

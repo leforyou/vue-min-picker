@@ -1,7 +1,7 @@
 <template>
     <div class="Button2">
         <div class="button">日期-选择器</div>
-        <Region
+        <PickerDate
             :visible.sync="visible"
             defaultDate="1990"
             start="1950"

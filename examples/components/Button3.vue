@@ -1,7 +1,7 @@
 <template>
     <div class="Button3">
         <div class="button" @click="visible = true">省市区-选择器</div>
-        <Region
+        <PickerRegion
             :visible.sync="visible"
             defaultRegion="广东省,茂名市,化州市"
             customItem="全部"

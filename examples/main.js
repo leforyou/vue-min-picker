@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 
 import picker from '../packages/index';
+console.log('picker: ', picker);
 Vue.use(picker); //全局注册
 
 Vue.config.productionTip = false;

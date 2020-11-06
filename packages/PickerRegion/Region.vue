@@ -18,7 +18,7 @@
 import Picker from './../Picker/Picker';
 import data from "./data.js";
 export default {
-    name: "Region",
+    name: "PickerRegion",
     components:{
         Picker,
     },

@@ -1,5 +1,2 @@
 .*
-*.md
-build/
 node_modules/
-src/

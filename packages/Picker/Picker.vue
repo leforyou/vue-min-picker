@@ -44,7 +44,7 @@ export default {
         data: {
             //二维数组
             type: Array,
-            default: () => [[],[]],//注意：处理props数据不更新，在父组件要用this.$set();设置值
+            default: () => [[]],//注意：处理props数据不更新，在父组件要用this.$set();设置值
         },
         defaultIndex: {
             type: [Number, Array],
