@@ -5,9 +5,13 @@
             :visible.sync="visible"
             :data="pickDataBirthday"
             :defaultIndex="defaultIndex"
+            title="普通选择器"
+            cancelText="取消"
+            confirmText=" 确定"
+            :maskClick="true"
             @change="change"
-            @confirm="confirmPicker"
-            confirmText="确定"
+            @cancel="cancel"
+            @confirm="confirm"
         />
     </div>
 </template>
@@ -19,6 +23,7 @@ export default {
             visible:false,
             pickDataBirthday:[[],[]],
             defaultIndex:[2,6],
+            value:"",
         };
     },
     created() {
@@ -63,9 +68,13 @@ export default {
                 }
             }
         },
-        confirmPicker(e){
+        confirm(e){
             console.log('e: ', JSON.stringify(e));
+            this.$emit('success', JSON.stringify(e));
         },
+        cancel(){
+            console.log("取消了");
+        }
     },
 };
 </script>

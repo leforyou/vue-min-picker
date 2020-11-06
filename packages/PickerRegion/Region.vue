@@ -24,6 +24,11 @@ export default {
         Picker,
     },
     props: {
+        visible: {
+            //显示与隐藏
+            type: Boolean,
+            default: false,
+        },
         defaultRegion: {
             type: String,
             default: "北京市,北京市,东城区",//广东省,广州市,天河区
@@ -47,7 +52,6 @@ export default {
     },
     data() {
         return {
-            visible:true,
             region:[[],[],[]],
             defaultIndex:[0,0,0],
         };
@@ -85,6 +89,7 @@ export default {
                 if(arr[i] === null || arr[i] === undefined)arr.splice(i,1);
             }
             arr = arr.map(item=>item.label);
+            this.close();
             this.$emit('confirm', arr.join(','));
         },
         setDefaultIndex(){

@@ -85,7 +85,7 @@ export default {
         getTransformY(){
             //获取位置
             let {transform} = this.animationStyle;
-            return parseInt(transform.split(',')[1].replace(/[^0-9|\-|\.]/g,""));
+            return parseInt(transform.split(',')[1].replace(/[^0-9|\-|.]/g,""));
         },
         getDeviceInfo(e){
             //获取屏幕参数
@@ -131,7 +131,7 @@ export default {
             }
             this.animationStyle.transform = `translate3d(0px, ${y}px, 0px) translateZ(0px)`;
         },
-        handleEnd(e){
+        handleEnd(){
             //松开
             if (!IS_PHONE) {
                 document.removeEventListener(MOVE_EVENT, this.handleMove, false)
@@ -153,7 +153,7 @@ export default {
             //惯性滑动:设置固定值加速度，速度直线递减到零
             let v = distance / duration;//速度
             let dir = v > 0 ? 1 : -1; //加速度方向
-            let a = 0.005 * dir;//设置加速度，该值是参考网络文档
+            let a = 0.003 * dir;//设置加速度，该值是参考网络文档
             let t = v/a;//惯性结束的时间=速度/加速度
             let s = 1/2 * v * t;//位移（路程）
 
@@ -162,7 +162,7 @@ export default {
             index = Math.max(index,0);
             index = Math.min(index,this.lists.length - 1);
             this.animationStyle.transitionProperty = `transform`;
-            this.animationStyle.transitionDuration = `1000ms`;
+            this.animationStyle.transitionDuration = `1500ms`;
             this.setTransformY(index);
         },
         slowSlide(){
@@ -214,8 +214,8 @@ div{
         pointer-events: none;
         height: 45px;
         .ul {
-            transition-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
-            will-change: transform;
+            //transition-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
+            transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
             .li {
                 overflow: hidden;
                 white-space: nowrap;

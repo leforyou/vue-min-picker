@@ -1,6 +1,16 @@
 <template>
     <div class="Button3">
-        <div class="button">省市区-选择器</div>
+        <div class="button" @click="visible = true">省市区-选择器</div>
+        <Region
+            :visible.sync="visible"
+            defaultRegion="广东省,茂名市,化州市"
+            title="省市区选择器"
+            cancelText="取消"
+            confirmText=" 确定"
+            :maskClick="false"
+            @cancel="cancel"
+            @confirm="confirm"
+        />
     </div>
 </template>
 <script>
@@ -8,7 +18,7 @@ export default {
     name: "Button3",
     data() {
         return {
-            
+            visible:false,
         };
     },
     mounted() {
@@ -17,7 +27,13 @@ export default {
         });
     },
     methods: {
-        
+        confirm(e){
+            console.log('确定: ', JSON.stringify(e));
+            this.$emit('success', JSON.stringify(e));
+        },
+        cancel(){
+            console.log("取消了");
+        }
     },
 };
 </script>
