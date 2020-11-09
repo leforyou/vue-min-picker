@@ -4,8 +4,8 @@
         <PickerDate
             :visible.sync="visible"
             :initDate="defaults"
-            start="1950-02-03"
-            end="2030-06-05"
+            start="1980-11-15"
+            end="2010-06-15"
             format="YYYY-MM-DD"
             title="日期选择器"
             cancelText="取消"

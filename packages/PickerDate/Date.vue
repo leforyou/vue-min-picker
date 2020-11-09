@@ -71,6 +71,7 @@ export default {
                 //初始化默认值，只执行一次
                 this.once = 1;
                 this.initData();
+                this.setDefaultDate();
             } 
         },
     },
@@ -86,6 +87,7 @@ export default {
     },
     created() {
         this.initData();
+        this.setDefaultDate();
     },
     mounted() {
         this.$nextTick(function() {
@@ -101,6 +103,28 @@ export default {
             this.createMonth();
             this.createDay();
         },
+        setDefaultDate(){
+            //设置默认日期
+            let d = new Date(this.defaultDate);
+            let arr = this.data[0];
+            for (let i = 0; i < arr.length; i++) {
+                if(arr[i].value == d.getFullYear()){
+                    this.$set(this.defaultIndex,0,i);
+                }
+            }
+            arr = this.data[1] || [];
+            for (let i = 0; i < arr.length; i++) {
+                if(arr[i].value == add0(d.getMonth() + 1)){
+                    this.$set(this.defaultIndex,1,i);
+                }
+            }
+            arr = this.data[2] || [];
+            for (let i = 0; i < arr.length; i++) {
+                if(arr[i].value == add0(d.getDate())){
+                    this.$set(this.defaultIndex,2,i);
+                }
+            }
+        },
         handleDate(date){
             //ios只能读取YYYY/MM/DD的格式
             if(date.length === 4)date += '/01/01';
@@ -110,24 +134,19 @@ export default {
         createYear(){
             //年
             let arr = [];
-            let d = new Date(this.defaultDate);
             let s = new Date(this.startDate);
             let e = new Date(this.endDate);
             for (let i = s.getFullYear(); i <= e.getFullYear(); i++) {
                 arr.push({label:`${i}年`,value:`${i}`});
-                if(i === d.getFullYear()){
-                    let index = i - s.getFullYear();
-                    this.$set(this.defaultIndex,0,index);
-                }
             }
             this.$set(this.data,0,arr);
         },
         createMonth(){
             //月
+            if(this.format.indexOf('MM') === -1)return;
             let arr = [];
             let first = 0;
             let last = 0;
-            let d = new Date(this.defaultDate);
             let s = new Date(this.startDate);
             let e = new Date(this.endDate);
             if(s.getFullYear() === e.getFullYear()){
@@ -151,19 +170,15 @@ export default {
             }
             for (let i = first; i <= last; i++) {
                 arr.push({label:`${i}月`,value:`${add0(i)}`});
-                if(i === d.getMonth() + 1){
-                    let index = i - 1;
-                    this.$set(this.defaultIndex,1,index);
-                }
             }
             this.$set(this.data,1,arr);
         },
         createDay(){
             //天
+            if(this.format.indexOf('DD') === -1)return;
             let arr = [];
             let first = 0;
             let last = 0;
-            let d = new Date(this.defaultDate);
             let s = new Date(this.startDate);
             let e = new Date(this.endDate);
             if(s.getFullYear() === e.getFullYear()){
@@ -204,10 +219,6 @@ export default {
             }
             for (let i = first; i <= last; i++) {
                 arr.push({label:`${i}日`,value:`${add0(i)}`});
-                if(i === d.getDate()){
-                    let index = i - 1;
-                    this.$set(this.defaultIndex,2,index);
-                }
             }
             this.$set(this.data,2,arr);
         },
@@ -215,16 +226,16 @@ export default {
             let {position,selectedIndex} = e;
             if(position === 0){
                 //年-滑动
-                this.createMonth();
-                this.createDay();
                 this.defaultIndex[0] = selectedIndex;
                 this.defaultIndex[1] = 0;
                 this.defaultIndex[2] = 0;
+                this.createMonth();
+                this.createDay();
             }else if(position === 1){
                 //月-滑动
-                this.createDay();
                 this.defaultIndex[1] = selectedIndex;
                 this.defaultIndex[2] = 0;
+                this.createDay();
             }else if(position === 2){
                 this.defaultIndex[2] = selectedIndex;
             }
@@ -240,25 +251,28 @@ export default {
         },
         confirm(){
             this.close();
-            let y = (this.data[0][this.defaultIndex[0]]).value;
-            let m = (this.data[1][this.defaultIndex[1]]).value;
-            let d = (this.data[2][this.defaultIndex[2]]).value;
             switch (this.format) {
                 case "YYYY":
-                    this.$emit('confirm', `${y}`);
+                    this.$emit('confirm', `${this.getIndexValue(0)}`);
                     break;
                 case "YYYY-MM":
-                    this.$emit('confirm', `${y}-${m}`);
+                    this.$emit('confirm', `${this.getIndexValue(0)}-${this.getIndexValue(1)}`);
                     break;
                 default:
-                    this.$emit('confirm', `${y}-${m}-${d}`);
+                    this.$emit('confirm', `${this.getIndexValue(0)}-${this.getIndexValue(1)}-${this.getIndexValue(2)}`);
                     break;
             }
         },
+        getIndexValue(index){
+            //根据下标，获取对应的值
+            let arr = this.data[index] || [];
+            let i = this.defaultIndex[index] || 0;
+            return arr[i].value;
+        },
         getCurrentMonthDays(date) {
             if(date === undefined){
-                let y = (this.data[0][this.defaultIndex[0]]).value;
-                let m = (this.data[1][this.defaultIndex[1]]).value;
+                let y = this.getIndexValue(0);
+                let m = this.getIndexValue(1);
                 date = `${y}/${m}/01`;
             }
             //获取一个月的天数
