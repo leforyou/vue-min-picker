@@ -62,7 +62,7 @@ export default {
 | 参数         | 说明                                                         | 是否必须 | 类型                     | 默认值 |
 | :----------- | :----------------------------------------------------------- | :------- | :----------------------- | :----- |
 | visible      | 显示/隐藏picker                                              | 是       | Boolean                  | false  |
-| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]] | 是       | Array                    | [[]]   |
+| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。 | 是       | Array                    | [[]]   |
 | layer        | 联动显示列数                                                 | 否       | Number                   | 0      |
 | defaultIndex | 默认显示的index                                              | 否       | Number/Array(多列用数组) | 无     |
 | cancelText   | 取消按钮文字                                                 | 否       | String                   | '取消' |

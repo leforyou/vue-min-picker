@@ -3,7 +3,7 @@
         <div class="button" @click="visible = true">省市区-选择器</div>
         <PickerRegion
             :visible.sync="visible"
-            defaultRegion="广东省,茂名市,化州市"
+            :defaultRegion="defaultRegion"
             customItem="全部"
             title="省市区选择器"
             cancelText="取消"
@@ -20,11 +20,12 @@ export default {
     data() {
         return {
             visible:false,
+            defaultRegion:"",
         };
     },
     mounted() {
         this.$nextTick(function() {
-            
+            this.defaultRegion = "广东省,茂名市,化州市";
         });
     },
     methods: {

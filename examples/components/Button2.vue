@@ -1,11 +1,11 @@
 <template>
     <div class="Button2">
-        <div class="button">日期-选择器</div>
+        <div class="button" @click="visible = true">日期-选择器</div>
         <PickerDate
             :visible.sync="visible"
-            defaultDate="1990"
-            start="1950"
-            end="2030"
+            :default="defaults"
+            start="1950-02-03"
+            end="2030-06-05"
             format="YYYY-MM-DD"
             title="日期选择器"
             cancelText="取消"
@@ -21,12 +21,13 @@ export default {
     name: "Button2",
     data() {
         return {
+            defaults:'',
             visible:false,
         };
     },
     mounted() {
         this.$nextTick(function() {
-            
+            this.defaults = '1990-08-14';
         });
     },
     methods: {

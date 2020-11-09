@@ -34,7 +34,7 @@ export default {
         },
         customItem: {
             type: String,
-            default: '',
+            default: '',//可以在每列的顶部，添加一个定义选项【如：全部】
         },
         title: {
             type: String,
@@ -53,8 +53,18 @@ export default {
             default: false,
         },
     },
+    watch: {
+        defaultRegion(){
+            if(this.once === 0){
+                //初始化默认值，只执行一次
+                this.once = 1;
+                this.setDefaultIndex();
+            } 
+        },
+    },
     data() {
         return {
+            once:0,
             region:[[],[],[]],
             defaultIndex:[0,0,0],
         };
@@ -119,7 +129,7 @@ export default {
                     });
                     if(provinceName === provinceObj[key]){
                         code = key;
-                        this.defaultIndex[0] = !this.customItem?i:i+1;
+                        this.defaultIndex[0] = this.customItem?i+1:i;
                     }
                 }
             }
@@ -141,7 +151,7 @@ export default {
                     });
                     if(cityName === cityObj[key]){
                         code = key;
-                        this.defaultIndex[1] = !this.customItem?j:j+1;
+                        this.defaultIndex[1] = this.customItem?j+1:j;
                     }
                 }
             }
@@ -163,13 +173,13 @@ export default {
                     });
                     if(districtName === districtObj[key]){
                         code = key;
-                        this.defaultIndex[2] = !this.customItem?k:k+1;
-                        //this.$set(this.defaultIndex,2,k);//如果使用mounted生命周期函数调用setDefaultIndex()，必须使用$set()方法更新props的数据
+                        //this.defaultIndex[2] = this.customItem?k+1:k;
+                        this.$set(this.defaultIndex,2,this.customItem?k+1:k);//如果使用mounted生命周期函数调用setDefaultIndex()，必须使用$set()方法更新props的数据
                     }
                 }
             }
-            this.region[2] = districtArr;
-            //this.$set(this.region,2,districtArr);//如果使用mounted生命周期函数调用setDefaultIndex()，必须使用$set()方法更新props的数据
+            //this.region[2] = districtArr;
+            this.$set(this.region,2,districtArr);//如果使用mounted生命周期函数调用setDefaultIndex()，必须使用$set()方法更新props的数据
         },
         changeCityData(selectedIndex){
             //修改城市的数据
