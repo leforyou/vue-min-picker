@@ -71,7 +71,6 @@ export default {
                 //初始化默认值，只执行一次
                 this.once = 1;
                 this.initData();
-                this.setDefaultDate();
             } 
         },
     },
@@ -87,7 +86,6 @@ export default {
     },
     created() {
         this.initData();
-        this.setDefaultDate();
     },
     mounted() {
         this.$nextTick(function() {
@@ -96,18 +94,31 @@ export default {
     },
     methods: {
         initData(){
-            this.defaultDate = this.handleDate(this.initDate || this.start);
-            this.startDate = this.handleDate(this.start);
-            this.endDate = this.handleDate(this.end);
+            this.setDefaultDate();
             this.createYear();
             this.createMonth();
             this.createDay();
         },
         setDefaultDate(){
             //设置默认日期
+            this.defaultDate = this.handleDate(this.initDate || this.start);
+            this.startDate = this.handleDate(this.start);
+            this.endDate = this.handleDate(this.end);
+
             let d = new Date(this.defaultDate);
-            let arr = this.data[0];
-            for (let i = 0; i < arr.length; i++) {
+            let s = new Date(this.startDate);
+            let e = new Date(this.endDate);
+
+            for (let i = s.getFullYear(); i <= e.getFullYear(); i++) {
+                if(i == d.getFullYear()){
+                    let index = i - s.getFullYear();
+                    this.$set(this.defaultIndex,0,index);
+                }
+            }
+
+
+
+            /* for (let i = 0; i < arr.length; i++) {
                 if(arr[i].value == d.getFullYear()){
                     this.$set(this.defaultIndex,0,i);
                 }
@@ -123,7 +134,7 @@ export default {
                 if(arr[i].value == add0(d.getDate())){
                     this.$set(this.defaultIndex,2,i);
                 }
-            }
+            } */
         },
         handleDate(date){
             //ios只能读取YYYY/MM/DD的格式
