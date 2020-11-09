@@ -102,40 +102,6 @@ export default {
             this.createMonth(true);
             this.createDay(true);
         },
-        setDefaultDate(){
-            //设置默认日期
-
-            /* let d = new Date(this.defaultDate);
-            let s = new Date(this.startDate);
-            let e = new Date(this.endDate);
-
-            for (let i = s.getFullYear(); i <= e.getFullYear(); i++) {
-                if(i == d.getFullYear()){
-                    let index = i - s.getFullYear();
-                    this.$set(this.defaultIndex,0,index);
-                }
-            } */
-
-
-
-            /* for (let i = 0; i < arr.length; i++) {
-                if(arr[i].value == d.getFullYear()){
-                    this.$set(this.defaultIndex,0,i);
-                }
-            }
-            arr = this.data[1] || [];
-            for (let i = 0; i < arr.length; i++) {
-                if(arr[i].value == add0(d.getMonth() + 1)){
-                    this.$set(this.defaultIndex,1,i);
-                }
-            }
-            arr = this.data[2] || [];
-            for (let i = 0; i < arr.length; i++) {
-                if(arr[i].value == add0(d.getDate())){
-                    this.$set(this.defaultIndex,2,i);
-                }
-            } */
-        },
         handleDate(date){
             //ios只能读取YYYY/MM/DD的格式
             if(date.length === 4)date += '/01/01';
