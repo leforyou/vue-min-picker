@@ -3,7 +3,7 @@
         <div class="button" @click="visible = true">日期-选择器</div>
         <PickerDate
             :visible.sync="visible"
-            :default="defaults"
+            :initDate="defaults"
             start="1950-02-03"
             end="2030-06-05"
             format="YYYY-MM-DD"

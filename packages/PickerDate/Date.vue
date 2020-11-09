@@ -28,7 +28,7 @@ export default {
             type: Boolean,
             default: false,
         },
-        default: {
+        initDate: {
             type: String,
             default: "",
         },
@@ -66,11 +66,11 @@ export default {
         },
     },
     watch: {
-        defaultDate(){
+        initDate(){
             if(this.once === 0){
                 //初始化默认值，只执行一次
                 this.once = 1;
-                this.initDefault();
+                this.initData();
             } 
         },
     },
@@ -85,7 +85,7 @@ export default {
         };
     },
     created() {
-        this.initDefault();
+        this.initData();
     },
     mounted() {
         this.$nextTick(function() {
@@ -93,8 +93,8 @@ export default {
         });
     },
     methods: {
-        initDefault(){
-            this.defaultDate = this.handleDate(this.default || this.start);
+        initData(){
+            this.defaultDate = this.handleDate(this.initDate || this.start);
             this.startDate = this.handleDate(this.start);
             this.endDate = this.handleDate(this.end);
             this.createYear();
@@ -215,16 +215,16 @@ export default {
             let {position,selectedIndex} = e;
             if(position === 0){
                 //年-滑动
+                this.createMonth();
+                this.createDay();
                 this.defaultIndex[0] = selectedIndex;
                 this.defaultIndex[1] = 0;
                 this.defaultIndex[2] = 0;
-                this.createMonth();
-                this.createDay();
             }else if(position === 1){
                 //月-滑动
+                this.createDay();
                 this.defaultIndex[1] = selectedIndex;
                 this.defaultIndex[2] = 0;
-                this.createDay();
             }else if(position === 2){
                 this.defaultIndex[2] = selectedIndex;
             }
@@ -254,7 +254,6 @@ export default {
                     this.$emit('confirm', `${y}-${m}-${d}`);
                     break;
             }
-            console.log(888888888888,`${y}-${m}-${d}`);
         },
         getCurrentMonthDays(date) {
             if(date === undefined){

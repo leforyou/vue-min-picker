@@ -58,7 +58,7 @@ export default {
             if(this.once === 0){
                 //初始化默认值，只执行一次
                 this.once = 1;
-                this.setDefaultIndex();
+                this.initData();
             } 
         },
     },
@@ -70,7 +70,7 @@ export default {
         };
     },
     created() {
-        this.setDefaultIndex();
+        this.initData();
     },
     mounted() {
         this.$nextTick(function() {
@@ -105,7 +105,7 @@ export default {
             this.close();
             this.$emit('confirm', arr.join(','));
         },
-        setDefaultIndex(){
+        initData(){
             //设置显示的默认地址下标，下面的代码是根据data.json数据结构编写的
             let arr = this.defaultRegion.split(',');
             let provinceName = arr[0];
@@ -174,12 +174,12 @@ export default {
                     if(districtName === districtObj[key]){
                         code = key;
                         //this.defaultIndex[2] = this.customItem?k+1:k;
-                        this.$set(this.defaultIndex,2,this.customItem?k+1:k);//如果使用mounted生命周期函数调用setDefaultIndex()，必须使用$set()方法更新props的数据
+                        this.$set(this.defaultIndex,2,this.customItem?k+1:k);//如果父组件使用mounted生命周期函数调用initData()，必须使用$set()方法更新props的数据
                     }
                 }
             }
             //this.region[2] = districtArr;
-            this.$set(this.region,2,districtArr);//如果使用mounted生命周期函数调用setDefaultIndex()，必须使用$set()方法更新props的数据
+            this.$set(this.region,2,districtArr);//如果父组件使用mounted生命周期函数调用initData()，必须使用$set()方法更新props的数据
         },
         changeCityData(selectedIndex){
             //修改城市的数据
