@@ -2,11 +2,7 @@
 
 vue-min-picker一共有三种选择器Picker/PickerDate/PickerRegion，【普通选择器】【日期选择器】【省市区选择器】。【日期选择器】与【省市区选择器】是基于【普通选择器】进行开发的出来的。
 
-注：
-
-1.如果【属性参数】是在组件挂载后生成的，要用
-
-2.如果需要修改按钮字体颜色，可以用全局的css样式覆盖。
+注：如果需要修改按钮字体颜色，可以用全局的css样式覆盖。
 
 **安装**：
 
@@ -83,11 +79,19 @@ export default {
     data() {
         return {
             visible:false,
-            pickData:[[{label:`男`,value:0},{label:`女`,value:1}]],
-            defaultIndex:[1],
+            //pickData:[[{label:`男`,value:0},{label:`女`,value:1}]],
+            pickData:[],
+            defaultIndex:[0],
         };
     },
     created() {
+    },
+    mounted() {
+        this.$nextTick(function() {
+            let arr = [{label:`男`,value:0},{label:`女`,value:1}];
+            this.$set(this.pickData, 0, arr);
+            this.$set(this.defaultIndex, 0, 1);//设置默认值（女）
+        });
     },
     methods: {
         change(e){
@@ -107,10 +111,10 @@ export default {
 **普通选择器-属性参数**
 
 | 参数         | 说明                                                         | 是否必须 | 类型              | 默认值 |
-| :----------- | :----------------------------------------------------------- | :------- | :---------------- | :----- |
+| :----------- | ------------------------------------------------------------ | :------- | :---------------- | :----- |
 | visible      | 显示/隐藏picker                                              | 是       | Boolean           | false  |
-| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。<br />注：如果数据是在Picker组件挂载后生成的，要用this.$set();赋值，否则组件数据不会刷新。 | 是       | Array             | [[]]   |
-| defaultIndex | 默认显示的index                                              | 否       | Array(多列用数组) | []     |
+| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。<br />注：如果数据是在Picker组件挂载后生成的，要用this.$set();赋值，否则组件数据不会刷新 | 是       | Array             | [[]]   |
+| defaultIndex | 默认显示的index。Picker组件挂载后或异步获取数据，要用this.$set();赋值 | 否       | Array(多列用数组) | []     |
 | cancelText   | 取消按钮文字                                                 | 否       | String            | '取消' |
 | confirmText  | 去确认按钮文字                                               | 否       | String            | '确认' |
 | title        | picker标题                                                   | 否       | String            | ''     |
