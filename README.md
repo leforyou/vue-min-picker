@@ -89,7 +89,7 @@ export default {
     mounted() {
         this.$nextTick(function() {
             let arr = [{label:`男`,value:0},{label:`女`,value:1}];
-            this.$set(this.pickData, 0, arr);
+            this.$set(this.pickData, 0, arr);//组件挂载后赋值
             this.$set(this.defaultIndex, 0, 1);//设置默认值（女）
         });
     },
@@ -113,7 +113,7 @@ export default {
 | 参数         | 说明                                                         | 是否必须 | 类型              | 默认值 |
 | :----------- | ------------------------------------------------------------ | :------- | :---------------- | :----- |
 | visible      | 显示/隐藏picker                                              | 是       | Boolean           | false  |
-| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。<br />注：如果数据是在Picker组件挂载后生成的，要用this.$set();赋值，否则组件数据不会刷新 | 是       | Array             | [[]]   |
+| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。<br />注：如果数据是在Picker组件挂载后或异步生成的，要用this.$set();赋值，否则组件数据不会刷新 | 是       | Array             | [[]]   |
 | defaultIndex | 默认显示的index。Picker组件挂载后或异步获取数据，要用this.$set();赋值 | 否       | Array(多列用数组) | []     |
 | cancelText   | 取消按钮文字                                                 | 否       | String            | '取消' |
 | confirmText  | 去确认按钮文字                                               | 否       | String            | '确认' |
