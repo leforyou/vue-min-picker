@@ -51,35 +51,214 @@ export default {
 </script>
 ```
 
-**picker普通选择器的使用**
+=======================================================================================
+
+**1.Picker普通选择器的使用**
 
 ```js
-
+<template>
+    <div class="Button1">
+        <div class="button" @click="visible = true">普通-选择器</div>
+        <Picker
+            :visible.sync="visible"
+            :data="pickData"
+            :defaultIndex="defaultIndex"
+            title="普通选择器"
+            cancelText="取消"
+            confirmText=" 确定"
+            :maskClick="true"
+            @change="change"
+            @cancel="cancel"
+            @confirm="confirm"
+        />
+    </div>
+</template>
+<script>
+export default {
+    name: "Button1",
+    data() {
+        return {
+            visible:false,
+            pickData:[[{label:`男`,value:0},{label:`女`,value:1}]],
+            defaultIndex:[1],
+        };
+    },
+    created() {
+    },
+    methods: {
+        change(e){
+            console.log('e: ', e);
+        },
+        confirm(e){
+            console.log('e: ', JSON.stringify(e));
+        },
+        cancel(){
+            console.log("取消了");
+        }
+    },
+};
+</script>
 ```
 
-**picker普通选择器-属性参数**
+**Picker普通选择器-属性参数**
 
-| 参数         | 说明                                                         | 是否必须 | 类型                     | 默认值 |
-| :----------- | :----------------------------------------------------------- | :------- | :----------------------- | :----- |
-| visible      | 显示/隐藏picker                                              | 是       | Boolean                  | false  |
-| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。 | 是       | Array                    | [[]]   |
-| layer        | 联动显示列数                                                 | 否       | Number                   | 0      |
-| defaultIndex | 默认显示的index                                              | 否       | Number/Array(多列用数组) | 无     |
-| cancelText   | 取消按钮文字                                                 | 否       | String                   | '取消' |
-| confirmText  | 去确认按钮文字                                               | 否       | String                   | '确认' |
-| title        | picker标题                                                   | 否       | String                   | ''     |
-| showToolbar  | 显示头部                                                     | 否       | Boolean                  | false  |
-| maskClick    | 遮罩层是否可以点击关闭                                       | 否       | Boolean                  | false  |
-| itemHeight   | 每一行的高度                                                 | 否       | Number, String           | '44px' |
-| rowNumber    | 显示多少行(建议单数)                                         | 否       | Number                   | 5      |
-| appendToBody | 是否插入到body中                                             | 否       | Boolean                  | false  |
+| 参数         | 说明                                                         | 是否必须 | 类型              | 默认值 |
+| :----------- | :----------------------------------------------------------- | :------- | :---------------- | :----- |
+| visible      | 显示/隐藏picker                                              | 是       | Boolean           | false  |
+| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]] | 是       | Array             | [[]]   |
+| defaultIndex | 默认显示的index                                              | 否       | Array(多列用数组) | []     |
+| cancelText   | 取消按钮文字                                                 | 否       | String            | '取消' |
+| confirmText  | 去确认按钮文字                                               | 否       | String            | '确认' |
+| title        | picker标题                                                   | 否       | String            | ''     |
+| maskClick    | 点击透明遮罩层是否可以关闭                                   | 否       | Boolean           | false  |
 
-
-
-**picker普通选择器-事件说明**
+**Picker普通选择器-事件说明**
 
 | 参数    | 说明         | 是否必须 | 类型          | 默认值 |
 | :------ | :----------- | :------- | :------------ | :----- |
 | change  | 数据变化事件 | 否       | function(val) | 无     |
 | cancel  | 取消选择     | 否       | function      | 无     |
 | confirm | 确认选择     | 否       | function(val) | 无     |
+
+
+
+=======================================================================================
+
+
+
+**2.PickerDate日期选择器的使用**
+
+```js
+<template>
+    <div class="Button2">
+        <div class="button" @click="visible = true">日期-选择器</div>
+        <PickerDate
+            :visible.sync="visible"
+            :initDate="defaults"
+            start="1980-06-12"
+            end="2000-12-11"
+            format="YYYY-MM-DD"
+            title="日期选择器"
+            cancelText="取消"
+            confirmText=" 确定"
+            :maskClick="false"
+            @cancel="cancel"
+            @confirm="confirm"
+        />
+    </div>
+</template>
+<script>
+export default {
+    name: "Button2",
+    data() {
+        return {
+            defaults:'',
+            visible:false,
+        };
+    },
+    mounted() {
+        this.$nextTick(function() {
+            this.defaults = '1993-06-12';
+        });
+    },
+    methods: {
+        confirm(e){
+            console.log('确定: ', JSON.stringify(e));
+        },
+        cancel(){
+            console.log("取消了");
+        }
+    },
+};
+</script>
+```
+
+**PickerDate普通选择器-属性参数**
+
+| 参数        | 说明                                          | 是否必须 | 类型    | 默认值       |
+| :---------- | :-------------------------------------------- | :------- | :------ | :----------- |
+| visible     | 显示/隐藏picker                               | 是       | Boolean | false        |
+| initDate    | 默认显示的日期                                | 否       | String  | 开始的日期   |
+| start       | 开始的日期                                    | 否       | String  | "1900-01-01" |
+| end         | 结束的日期                                    | 否       | String  | "2100-12-31" |
+| format      | 日期格式可以为"YYYY"或"YYYY-MM"或"YYYY-MM-DD" | 否       | String  | "YYYY-MM-DD" |
+| cancelText  | 取消按钮文字                                  | 否       | String  | '取消'       |
+| confirmText | 去确认按钮文字                                | 否       | String  | '确认'       |
+| title       | picker标题                                    | 否       | String  | ''           |
+| maskClick   | 点击透明遮罩层是否可以关闭                    | 否       | Boolean | false        |
+
+**PickerDate普通选择器-事件说明**
+
+| 参数    | 说明     | 是否必须 | 类型          | 默认值 |
+| :------ | :------- | :------- | :------------ | :----- |
+| cancel  | 取消选择 | 否       | function      | 无     |
+| confirm | 确认选择 | 否       | function(val) | 无     |
+
+
+
+=======================================================================================
+
+
+
+**3.PickerRegion日期选择器的使用**
+
+```js
+<template>
+    <div class="Button3">
+        <div class="button" @click="visible = true">省市区-选择器</div>
+        <PickerRegion
+            :visible.sync="visible"
+            :defaultRegion="defaultRegion"
+            customItem="全部"
+            title="省市区选择器"
+            cancelText="取消"
+            confirmText=" 确定"
+            :maskClick="false"
+            @cancel="cancel"
+            @confirm="confirm"
+        />
+    </div>
+</template>
+<script>
+export default {
+    name: "Button3",
+    data() {
+        return {
+            visible:false,
+            defaultRegion:"",
+        };
+    },
+    mounted() {
+        this.$nextTick(function() {
+            this.defaultRegion = "广东省,茂名市,化州市";
+        });
+    },
+    methods: {
+        confirm(e){
+            console.log('确定: ', JSON.stringify(e));
+        },
+        cancel(){
+            console.log("取消了");
+        }
+    },
+};
+```
+
+**PickerRegion普通选择器-属性参数**
+
+| 参数          | 说明                                           | 是否必须 | 类型    | 默认值                 |
+| :------------ | :--------------------------------------------- | :------- | :------ | :--------------------- |
+| visible       | 显示/隐藏picker                                | 是       | Boolean | false                  |
+| defaultRegion | 默认显示的省市区                               | 否       | String  | "北京市,北京市,东城区" |
+| customItem    | 可以在每列的顶部，添加一个定义选项【如：全部】 | 否       | String  | ""                     |
+| cancelText    | 取消按钮文字                                   | 否       | String  | '取消'                 |
+| confirmText   | 去确认按钮文字                                 | 否       | String  | '确认'                 |
+| title         | picker标题                                     | 否       | String  | ''                     |
+| maskClick     | 点击透明遮罩层是否可以关闭                     | 否       | Boolean | false                  |
+
+**PickerRegion普通选择器-事件说明**
+
+| 参数    | 说明     | 是否必须 | 类型          | 默认值 |
+| :------ | :------- | :------- | :------------ | :----- |
+| cancel  | 取消选择 | 否       | function      | 无     |
+| confirm | 确认选择 | 否       | function(val) | 无     |

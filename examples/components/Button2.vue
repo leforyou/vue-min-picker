@@ -4,8 +4,8 @@
         <PickerDate
             :visible.sync="visible"
             :initDate="defaults"
-            start="1980-11-15"
-            end="2010-06-15"
+            start="1980-06-12"
+            end="2000-12-11"
             format="YYYY-MM-DD"
             title="日期选择器"
             cancelText="取消"
@@ -27,7 +27,7 @@ export default {
     },
     mounted() {
         this.$nextTick(function() {
-            this.defaults = '1990-08-14';
+            this.defaults = '1993-06-12';
         });
     },
     methods: {

@@ -263,7 +263,7 @@ export default {
         },
         getIndexValue(index){
             //根据下标，获取对应的值
-            let arr = this.data[index] || [];
+            let arr = this.data[index] || [{}];
             let i = this.defaultIndex[index] || 0;
             return arr[i].value;
         },
