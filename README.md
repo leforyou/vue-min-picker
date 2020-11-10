@@ -2,7 +2,11 @@
 
 vue-min-picker一共有三种选择器Picker/PickerDate/PickerRegion，【普通选择器】【日期选择器】【省市区选择器】。【日期选择器】与【省市区选择器】是基于【普通选择器】进行开发的出来的。
 
-如果需要修改字体颜色，可以用全局的css样式覆盖。
+注：
+
+1.如果【属性参数】是在组件挂载后生成的，要用
+
+2.如果需要修改按钮字体颜色，可以用全局的css样式覆盖。
 
 **安装**：
 
@@ -17,7 +21,7 @@ import Vue from 'vue';
 
 import 'vue-min-picker/lib/picker.css';//导入样式
 import picker from "vue-min-picker";
-Vue.use(picker);//注册（Picker,PickerDate,PickerRegion）
+Vue.use(picker);//注册3个组件（Picker,PickerDate,PickerRegion）
 
 Vue.config.productionTip = false;
 new Vue({
@@ -44,7 +48,7 @@ export default {
     },
     data() {
         return {
-            visible:true,
+            
         };
     },
 };
@@ -100,19 +104,19 @@ export default {
 </script>
 ```
 
-**Picker普通选择器-属性参数**
+**普通选择器-属性参数**
 
 | 参数         | 说明                                                         | 是否必须 | 类型              | 默认值 |
 | :----------- | :----------------------------------------------------------- | :------- | :---------------- | :----- |
 | visible      | 显示/隐藏picker                                              | 是       | Boolean           | false  |
-| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]] | 是       | Array             | [[]]   |
+| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。<br />注：如果数据是在Picker组件挂载后生成的，要用this.$set();赋值，否则组件数据不会刷新。 | 是       | Array             | [[]]   |
 | defaultIndex | 默认显示的index                                              | 否       | Array(多列用数组) | []     |
 | cancelText   | 取消按钮文字                                                 | 否       | String            | '取消' |
 | confirmText  | 去确认按钮文字                                               | 否       | String            | '确认' |
 | title        | picker标题                                                   | 否       | String            | ''     |
 | maskClick    | 点击透明遮罩层是否可以关闭                                   | 否       | Boolean           | false  |
 
-**Picker普通选择器-事件说明**
+**普通选择器-事件说明**
 
 | 参数    | 说明         | 是否必须 | 类型          | 默认值 |
 | :------ | :----------- | :------- | :------------ | :----- |
@@ -173,7 +177,7 @@ export default {
 </script>
 ```
 
-**PickerDate普通选择器-属性参数**
+**日期选择器-属性参数**
 
 | 参数        | 说明                                          | 是否必须 | 类型    | 默认值       |
 | :---------- | :-------------------------------------------- | :------- | :------ | :----------- |
@@ -187,7 +191,7 @@ export default {
 | title       | picker标题                                    | 否       | String  | ''           |
 | maskClick   | 点击透明遮罩层是否可以关闭                    | 否       | Boolean | false        |
 
-**PickerDate普通选择器-事件说明**
+**日期选择器-事件说明**
 
 | 参数    | 说明     | 是否必须 | 类型          | 默认值 |
 | :------ | :------- | :------- | :------------ | :----- |
@@ -200,7 +204,7 @@ export default {
 
 
 
-**3.PickerRegion日期选择器的使用**
+**3.PickerRegion省市区选择器的使用**
 
 ```js
 <template>
@@ -244,7 +248,7 @@ export default {
 };
 ```
 
-**PickerRegion普通选择器-属性参数**
+**省市区选择器-属性参数**
 
 | 参数          | 说明                                           | 是否必须 | 类型    | 默认值                 |
 | :------------ | :--------------------------------------------- | :------- | :------ | :--------------------- |
@@ -256,9 +260,10 @@ export default {
 | title         | picker标题                                     | 否       | String  | ''                     |
 | maskClick     | 点击透明遮罩层是否可以关闭                     | 否       | Boolean | false                  |
 
-**PickerRegion普通选择器-事件说明**
+**省市区选择器-事件说明**
 
 | 参数    | 说明     | 是否必须 | 类型          | 默认值 |
 | :------ | :------- | :------- | :------------ | :----- |
 | cancel  | 取消选择 | 否       | function      | 无     |
 | confirm | 确认选择 | 否       | function(val) | 无     |
+
