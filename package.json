@@ -1,6 +1,6 @@
 {
     "name": "vue-min-picker",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "picker for mobile",
     "main": "lib/picker.common.js",
     "scripts": {
