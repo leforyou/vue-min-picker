@@ -89,7 +89,8 @@ export default {
     mounted() {
         this.$nextTick(function() {
             //将组件添加到body下，降低层级z-index的影响
-            document.querySelector("body").appendChild(this.$el);
+            let dom = document.querySelector("#app>div") || document.querySelector("body");
+            dom.appendChild(this.$el);
         });
     },
     methods: {
