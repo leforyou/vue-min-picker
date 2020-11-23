@@ -25,7 +25,8 @@ export default {
     },
     mounted() {
         this.$nextTick(function() {
-            this.defaultRegion = "广东省,茂名市,化州市";
+            //this.defaultRegion = "广东省,茂名市,化州市";
+            this.defaultRegion = "广东省,全部,全部";
         });
     },
     methods: {

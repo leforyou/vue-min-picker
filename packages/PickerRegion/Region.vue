@@ -107,6 +107,7 @@ export default {
         },
         initData(){
             //设置显示的默认地址下标，下面的代码是根据data.json数据结构编写的
+            let defaultIndex = [];
             let arr = this.defaultRegion.split(',');
             let provinceName = arr[0];
             let cityName = arr[1];
@@ -129,7 +130,7 @@ export default {
                     });
                     if(provinceName === provinceObj[key]){
                         code = key;
-                        this.defaultIndex[0] = this.customItem?i+1:i;
+                        defaultIndex[0] = this.customItem?i+1:i;
                     }
                 }
             }
@@ -151,7 +152,7 @@ export default {
                     });
                     if(cityName === cityObj[key]){
                         code = key;
-                        this.defaultIndex[1] = this.customItem?j+1:j;
+                        defaultIndex[1] = this.customItem?j+1:j;
                     }
                 }
             }
@@ -173,11 +174,11 @@ export default {
                     });
                     if(districtName === districtObj[key]){
                         code = key;
-                        //this.defaultIndex[2] = this.customItem?k+1:k;
-                        this.$set(this.defaultIndex,2,this.customItem?k+1:k);//如果父组件使用mounted生命周期函数调用initData()，必须使用$set()方法更新props的数据
+                        defaultIndex[2] = this.customItem?k+1:k;
                     }
                 }
             }
+            this.$set(this,'defaultIndex',defaultIndex);
             //this.region[2] = districtArr;
             this.$set(this.region,2,districtArr);//如果父组件使用mounted生命周期函数调用initData()，必须使用$set()方法更新props的数据
         },
