@@ -10,7 +10,7 @@
             title="日期选择器"
             cancelText="取消"
             confirmText=" 确定"
-            :maskClick="false"
+            :maskClick="true"
             @cancel="cancel"
             @confirm="confirm"
         />

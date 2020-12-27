@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div class="Picker" ref="picker" v-show="visible">
-            <div class="close" @click="close" v-if="maskClick"></div>
+            <div class="close" @click="cancel" v-if="maskClick"></div>
             <div class="container">
                 <div class="head">
                     <button class="cancel" @click="cancel">{{cancelText || "取消"}}</button>
@@ -104,18 +104,14 @@ export default {
                 if(instances)instances[i].setTransformY(index);//设置默认值的位置
             }
         },
-        close(){
-            //关闭
-            this.$emit('update:visible', false);
-        },
         cancel(){
-            //取消
-            this.close();
+            //取消/关闭
+            this.$emit('update:visible', false);
             this.$emit('cancel', false);
         },
         confirm(){
             //确定
-            this.close();
+            this.cancel();
             let arr = [];
             for (let i = 0; i < this.selectedColumnIndex.length; i++) {
                 let index = this.selectedColumnIndex[i];

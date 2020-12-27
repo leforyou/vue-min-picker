@@ -7,8 +7,8 @@
             customItem="全部"
             title="省市区选择器"
             cancelText="取消"
-            confirmText=" 确定"
-            :maskClick="false"
+            confirmText="确定"
+            :maskClick="true"
             @cancel="cancel"
             @confirm="confirm"
         />
