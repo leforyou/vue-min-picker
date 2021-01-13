@@ -110,15 +110,15 @@ export default {
 
 **普通选择器-属性参数**
 
-| 参数         | 说明                                                         | 是否必须 | 类型              | 默认值 |
-| :----------- | ------------------------------------------------------------ | :------- | :---------------- | :----- |
-| visible      | 显示/隐藏picker                                              | 是       | Boolean           | false  |
-| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。<br />注：如果数据是在Picker组件挂载后或异步生成的，要用this.$set();赋值，否则组件数据不会刷新 | 是       | Array             | [[]]   |
-| defaultIndex | 默认显示的index。Picker组件挂载后或异步获取数据，要用this.$set();赋值 | 否       | Array(多列用数组) | []     |
-| cancelText   | 取消按钮文字                                                 | 否       | String            | '取消' |
-| confirmText  | 去确认按钮文字                                               | 否       | String            | '确认' |
-| title        | picker标题                                                   | 否       | String            | ''     |
-| maskClick    | 点击透明遮罩层是否可以关闭                                   | 否       | Boolean           | false  |
+| 参数         | 说明                                                         | 是否必须 | 类型    | 默认值 |
+| :----------- | ------------------------------------------------------------ | :------- | :------ | :----- |
+| visible      | 显示/隐藏picker                                              | 是       | Boolean | false  |
+| data         | 必须是二维数组[[{label:"",value:""}], [{label:"",value:""}]]。<br />注：如果数据是在Picker组件挂载后或异步生成的，要用this.$set();赋值，否则组件数据不会刷新 | 是       | Array   | [[]]   |
+| defaultIndex | 默认显示的index。Picker组件挂载后或异步获取数据，要用this.$set();赋值 | 否       | Array   | []     |
+| cancelText   | 取消按钮文字                                                 | 否       | String  | '取消' |
+| confirmText  | 确认按钮文字                                                 | 否       | String  | '确认' |
+| title        | picker标题                                                   | 否       | String  | ''     |
+| maskClick    | 点击透明遮罩层是否可以关闭                                   | 否       | Boolean | false  |
 
 **普通选择器-事件说明**
 
@@ -187,11 +187,11 @@ export default {
 | :---------- | :-------------------------------------------- | :------- | :------ | :----------- |
 | visible     | 显示/隐藏picker                               | 是       | Boolean | false        |
 | initDate    | 默认显示的日期                                | 否       | String  | 开始的日期   |
-| start       | 开始的日期                                    | 否       | String  | "1900-01-01" |
-| end         | 结束的日期                                    | 否       | String  | "2100-12-31" |
-| format      | 日期格式可以为"YYYY"或"YYYY-MM"或"YYYY-MM-DD" | 否       | String  | "YYYY-MM-DD" |
+| start       | 开始的日期                                    | 否       | String  | '1900-01-01' |
+| end         | 结束的日期                                    | 否       | String  | '2100-12-31' |
+| format      | 日期格式可以为'YYYY'或'YYYY-MM'或'YYYY-MM-DD' | 否       | String  | 'YYYY-MM-DD' |
 | cancelText  | 取消按钮文字                                  | 否       | String  | '取消'       |
-| confirmText | 去确认按钮文字                                | 否       | String  | '确认'       |
+| confirmText | 确认按钮文字                                  | 否       | String  | '确认'       |
 | title       | picker标题                                    | 否       | String  | ''           |
 | maskClick   | 点击透明遮罩层是否可以关闭                    | 否       | Boolean | false        |
 
@@ -257,10 +257,10 @@ export default {
 | 参数          | 说明                                           | 是否必须 | 类型    | 默认值                 |
 | :------------ | :--------------------------------------------- | :------- | :------ | :--------------------- |
 | visible       | 显示/隐藏picker                                | 是       | Boolean | false                  |
-| defaultRegion | 默认显示的省市区                               | 否       | String  | "北京市,北京市,东城区" |
-| customItem    | 可以在每列的顶部，添加一个定义选项【如：全部】 | 否       | String  | ""                     |
+| defaultRegion | 默认显示的省市区                               | 否       | String  | '北京市,北京市,东城区' |
+| customItem    | 可以在每列的顶部，添加一个定义选项【如：全部】 | 否       | String  | ''                     |
 | cancelText    | 取消按钮文字                                   | 否       | String  | '取消'                 |
-| confirmText   | 去确认按钮文字                                 | 否       | String  | '确认'                 |
+| confirmText   | 确认按钮文字                                   | 否       | String  | '确认'                 |
 | title         | picker标题                                     | 否       | String  | ''                     |
 | maskClick     | 点击透明遮罩层是否可以关闭                     | 否       | Boolean | false                  |
 
