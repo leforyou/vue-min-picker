@@ -53,10 +53,6 @@ export default {
 
 
 
-------
-
-
-
 ### **1.Picker普通选择器的使用**
 
 ```js
@@ -134,10 +130,6 @@ export default {
 
 
 
-------
-
-
-
 ### **2.PickerDate日期选择器的使用**
 
 ```js
@@ -205,10 +197,6 @@ export default {
 | :------ | :------- | :------- | :------------ | :----- |
 | cancel  | 取消选择 | 否       | function      | 无     |
 | confirm | 确认选择 | 否       | function(val) | 无     |
-
-
-
-------
 
 
 
