@@ -20,7 +20,7 @@
 在手指【按下》滑动》松开】屏幕的过程，时间间隔小于 LIMIT_TIME(280毫秒) 且滑动的距离大于 LIMIT_DISTANCE(16像素) 时，执行惯性滑动。
 */
 //兼容手机与电脑
-const IS_PHONE = 'ontouchstart' in window;
+const IS_PHONE = 'ontouchstart' in (window || {"ontouchstart":null});//uniapp的window对象是undefined
 const START_EVENT = IS_PHONE ? 'touchstart' : 'mousedown';
 const MOVE_EVENT = IS_PHONE ? 'touchmove' : 'mousemove';
 const END_EVENT = IS_PHONE ? 'touchend' : 'mouseup';
