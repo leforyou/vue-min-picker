@@ -165,16 +165,20 @@ export default {
             if(this.customItem){
                 districtArr.push({label:this.customItem,value:this.customItem});
             }
-            for (const key in districtObj) {
-                if (Object.prototype.hasOwnProperty.call(districtObj,key)) {
-                    k++;
-                    districtArr.push({
-                        label:districtObj[key],
-                        value:key,
-                    });
-                    if(districtName === districtObj[key]){
-                        code = key;
-                        defaultIndex[2] = this.customItem?k+1:k;
+            
+            if(!(this.customItem && defaultIndex[1] === undefined)){
+                //第二列城市为全部时，第三项必须只能含有一项【全部】
+                for (const key in districtObj) {
+                    if (Object.prototype.hasOwnProperty.call(districtObj,key)) {
+                        k++;
+                        districtArr.push({
+                            label:districtObj[key],
+                            value:key,
+                        });
+                        if(districtName === districtObj[key]){
+                            code = key;
+                            defaultIndex[2] = this.customItem?k+1:k;
+                        }
                     }
                 }
             }
