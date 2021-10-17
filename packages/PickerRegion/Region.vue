@@ -166,8 +166,8 @@ export default {
                 districtArr.push({label:this.customItem,value:this.customItem});
             }
             
-            if(!(this.customItem && defaultIndex[1] === undefined)){
-                //第二列城市为全部时，第三项必须只能含有一项【全部】
+            if(!(this.customItem && cityName === this.customItem)){
+                //第二列城市为【全部】时，第三项必须只能含有一项【全部】
                 for (const key in districtObj) {
                     if (Object.prototype.hasOwnProperty.call(districtObj,key)) {
                         k++;
